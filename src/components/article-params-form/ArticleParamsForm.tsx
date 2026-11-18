@@ -28,7 +28,7 @@ export const ArticleParamsForm = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formState, setFormState] = useState<ArticleStateType>(defaultArticleState);
 
-  const sideMenuRef = useRef<HTMLDivElement>(null);
+  const sideMenuRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -37,10 +37,9 @@ export const ArticleParamsForm = ({
         setIsMenuOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    // обязательно чистим слушатель
+    document.addEventListener('click', handleClickOutside);
     return (): void => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, [isMenuOpen]);
 
@@ -55,9 +54,12 @@ export const ArticleParamsForm = ({
   };
 
   return (
-    <div ref={sideMenuRef}>
+    <>
       <ArrowButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen((prev) => !prev)} />
-      <aside className={clsx(styles.container, { [styles.container_open]: isMenuOpen })}>
+      <aside
+        ref={sideMenuRef}
+        className={clsx(styles.container, { [styles.container_open]: isMenuOpen })}
+      >
         <form className={styles.form} onSubmit={handleSubmit} onReset={handleReset}>
           <Text as="h2" size={31} weight={800} uppercase>
             Задайте параметры
@@ -110,6 +112,6 @@ export const ArticleParamsForm = ({
           </div>
         </form>
       </aside>
-    </div>
+    </>
   );
 };
