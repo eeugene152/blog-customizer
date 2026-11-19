@@ -1,3 +1,4 @@
+import { useOutsideClickClose } from '@/hooks/useOutsideClickClose';
 import { clsx } from 'clsx';
 import { useState, useRef } from 'react';
 import arrowDown from 'src/images/arrow-down.svg';
@@ -5,7 +6,6 @@ import { Text } from 'src/ui/text';
 
 import { isFontFamilyClass } from './helpers/isFontFamilyClass';
 import { useEnterSubmit } from './hooks/useEnterSubmit';
-import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 import { Option } from './Option';
 
 import type { MouseEventHandler } from 'react';
